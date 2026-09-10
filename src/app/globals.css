@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-slate: #0A0A0B;
+    --text-oat: #F5F5F7;
+    --text-muted: #a1a1a6;
+    --border-hairline: rgba(255, 255, 255, 0.06);
+    --ease-liquid: cubic-bezier(0.76, 0, 0.24, 1);
+  }
+
+  html {
+    background-color: #0A0A0B;
+    color: #F5F5F7;
+    scroll-behavior: auto; /* Handled smoothly by Lenis */
+  }
+
+  body {
+    background-color: #0A0A0B;
+    color: #F5F5F7;
+    overflow-x: hidden;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Hide native cursor on desktop to allow custom luxury cursor */
+  @media (pointer: fine) {
+    body, 
+    a, 
+    button, 
+    input, 
+    select, 
+    textarea, 
+    [role="button"],
+    label {
+      cursor: none !important;
+    }
+  }
+}
+
+/* Liquid Micro-Interactions: 800ms cubic-bezier(0.76,0,0.24,1) */
+.liquid-transition {
+  transition: all 800ms cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.liquid-drift {
+  transition: transform 800ms cubic-bezier(0.76, 0, 0.24, 1), color 800ms cubic-bezier(0.76, 0, 0.24, 1);
+}
+.liquid-drift:hover {
+  transform: translateX(4px);
+}
+
+/* GPU Hardware Acceleration */
+.gpu-accel {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* Minimalist luxury scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0A0B;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(245, 245, 247, 0.15);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(245, 245, 247, 0.35);
+}
