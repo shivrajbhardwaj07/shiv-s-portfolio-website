@@ -36,15 +36,15 @@ export default function TheInterrogation() {
     >
       <div className="grid grid-cols-12 gap-4 mb-24">
         <div className="col-span-12 md:col-span-3">
-          <span className="text-[11px] uppercase tracking-[0.25em] text-[#a1a1a6] block font-light">
-            <span className="font-mono text-xs">09</span> // THE INTERROGATION
+          <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-mono text-white/50 block">
+            09 // THE INTERROGATION
           </span>
-          <span className="text-xs uppercase tracking-[0.2em] text-[#a1a1a6]/50 block mt-2 font-light">
+          <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-mono text-white/40 block mt-2">
             FREQUENT OBJECTIONS
           </span>
         </div>
         <div className="col-span-12 md:col-start-4 md:col-span-8">
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-light text-[#F5F5F7] tracking-tighter leading-[0.9]">
+          <h2 className="text-2xl md:text-4xl font-serif font-normal tracking-tight text-white/90 leading-[1.2]">
             Direct answers to architectural and operational queries.
           </h2>
         </div>
@@ -59,22 +59,22 @@ export default function TheInterrogation() {
               <button
                 type="button"
                 onClick={() => toggle(idx)}
-                className="w-full py-10 sm:py-12 text-left flex items-center justify-between gap-6 cursor-pointer group"
+                className="w-full py-8 sm:py-10 text-left flex items-center justify-between gap-6 cursor-pointer group"
               >
-                <div className="flex items-baseline gap-8 sm:gap-12 transition-transform duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-x-[4px]">
-                  <span className="font-mono text-xs text-[#a1a1a6]/50 group-hover:text-[#F5F5F7] transition-colors duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)]">
+                <div className="flex items-baseline gap-6 sm:gap-10 transition-transform duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-x-[4px]">
+                  <span className="font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-white/50 group-hover:text-white transition-colors duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)]">
                     0{idx + 1} //
                   </span>
-                  <span className="text-xl sm:text-3xl font-light text-[#F5F5F7] tracking-tight transition-colors duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)]">
+                  <span className="text-lg md:text-xl font-serif font-normal text-white/90 tracking-tight transition-colors duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)]">
                     {item.q}
                   </span>
                 </div>
 
-                <div className="text-[#a1a1a6] group-hover:text-[#F5F5F7] transition-colors duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)] shrink-0">
+                <div className="text-white/50 group-hover:text-white transition-colors duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)] shrink-0">
                   {isOpen ? (
-                    <Minus className="w-5 h-5 stroke-[1.2]" />
+                    <Minus className="w-4 h-4 stroke-[1.5]" />
                   ) : (
-                    <Plus className="w-5 h-5 stroke-[1.2]" />
+                    <Plus className="w-4 h-4 stroke-[1.5]" />
                   )}
                 </div>
               </button>
@@ -82,13 +82,13 @@ export default function TheInterrogation() {
               <div
                 className={`grid transition-all duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)] overflow-hidden ${
                   isOpen
-                    ? "grid-rows-[1fr] opacity-100 pb-10 sm:pb-12"
+                    ? "grid-rows-[1fr] opacity-100 pb-8 sm:pb-10"
                     : "grid-rows-[0fr] opacity-0 pb-0"
                 }`}
               >
                 <div className="overflow-hidden grid grid-cols-12 gap-4">
                   <div className="col-span-12 md:col-start-3 md:col-span-8">
-                    <p className="text-base sm:text-lg text-[#a1a1a6] font-light leading-relaxed tracking-wide">
+                    <p className="text-sm md:text-base font-sans font-light text-[#a1a1a6] leading-relaxed">
                       {item.a}
                     </p>
                   </div>

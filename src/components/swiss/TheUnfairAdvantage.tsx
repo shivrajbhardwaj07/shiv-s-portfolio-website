@@ -41,10 +41,10 @@ export default function TheUnfairAdvantage() {
       <div className="grid grid-cols-12 gap-4">
         {/* Label on Column 1-3 */}
         <div className="col-span-12 md:col-span-3 mb-10 md:mb-0">
-          <span className="text-[11px] uppercase tracking-[0.25em] text-[#a1a1a6] block font-light">
-            <span className="font-mono text-xs">02</span> // THE UNFAIR ADVANTAGE
+          <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-mono text-white/50 block">
+            02 // THE UNFAIR ADVANTAGE
           </span>
-          <span className="text-xs uppercase tracking-[0.2em] text-[#a1a1a6]/50 block mt-2 font-light">
+          <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-mono text-white/40 block mt-2">
             OPERATIONAL DOCTRINE
           </span>
         </div>
@@ -53,7 +53,7 @@ export default function TheUnfairAdvantage() {
         <div className="col-span-12 md:col-start-4 md:col-span-8 lg:col-span-7">
           <p
             ref={textRef}
-            className="text-2xl sm:text-4xl lg:text-[2.75rem] font-light tracking-tight text-[#F5F5F7] leading-[1.3]"
+            className="text-lg md:text-xl font-sans font-light leading-relaxed text-[#a1a1a6] max-w-2xl"
           >
             I do not just write code; I map complex operational logic and execute solutions with ruthless velocity. While legacy developers get stuck in theory, I build, optimize, and ship. Pure problem-solving. Zero friction.
           </p>

@@ -4,50 +4,39 @@ import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
 export default function CustomCursor() {
-  const lensRef = useRef<HTMLDivElement>(null);
   const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
   const labelRef = useRef<HTMLSpanElement>(null);
-
   const [cursorText, setCursorText] = useState("");
-  const [isVisible, setIsVisible] = useState(false);
-  const [isPointerFine, setIsPointerFine] = useState(false);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    const mediaQuery = window.matchMedia("(pointer: fine)");
-    setIsPointerFine(mediaQuery.matches);
-    if (!mediaQuery.matches) return;
-
-    const lens = lensRef.current;
     const dot = dotRef.current;
-    if (!lens || !dot) return;
+    const ring = ringRef.current;
+    if (!dot || !ring) return;
 
-    // High-performance quickTo setters for zero-latency dot and smooth lerped lens
-    const setDotX = gsap.quickTo(dot, "x", { duration: 0.04, ease: "power3.out" });
-    const setDotY = gsap.quickTo(dot, "y", { duration: 0.04, ease: "power3.out" });
+    // High-performance GSAP quickTo setters for zero-latency dot and smooth lerped lens
+    const setDotX = gsap.quickTo(dot, "x", { duration: 0.02, ease: "power3.out" });
+    const setDotY = gsap.quickTo(dot, "y", { duration: 0.02, ease: "power3.out" });
 
-    const setLensX = gsap.quickTo(lens, "x", { duration: 0.35, ease: "power3.out" });
-    const setLensY = gsap.quickTo(lens, "y", { duration: 0.35, ease: "power3.out" });
+    const setRingX = gsap.quickTo(ring, "x", { duration: 0.25, ease: "power3.out" });
+    const setRingY = gsap.quickTo(ring, "y", { duration: 0.25, ease: "power3.out" });
+
+    // Ensure cursor is visible immediately
+    gsap.set([dot, ring], { opacity: 1 });
 
     const onMouseMove = (e: MouseEvent) => {
-      if (!isVisible) setIsVisible(true);
-      const { clientX, clientY } = e;
-      setDotX(clientX);
-      setDotY(clientY);
-      setLensX(clientX);
-      setLensY(clientY);
+      setDotX(e.clientX);
+      setDotY(e.clientY);
+      setRingX(e.clientX);
+      setRingY(e.clientY);
     };
 
     const onMouseDown = () => {
-      gsap.to(lens, { scale: 0.85, duration: 0.2, ease: "power2.out" });
+      gsap.to(ring, { scale: 0.8, duration: 0.15, ease: "power2.out" });
     };
 
     const onMouseUp = () => {
-      gsap.to(lens, { scale: 1, duration: 0.3, ease: "power2.out" });
-    };
-
-    const onMouseLeave = () => {
-      setIsVisible(false);
+      gsap.to(ring, { scale: 1, duration: 0.2, ease: "power2.out" });
     };
 
     // Handle hover states for luxury reading lens
@@ -60,64 +49,65 @@ export default function CustomCursor() {
         const text = interactive.getAttribute("data-cursor-text") || "";
         setCursorText(text);
 
-        gsap.to(lens, {
+        gsap.to(ring, {
           scale: 1.8,
-          borderColor: "rgba(245, 245, 247, 0.4)",
-          backgroundColor: "rgba(245, 245, 247, 0.03)",
-          duration: 0.4,
+          borderColor: "#ffffff",
+          backgroundColor: "rgba(255, 255, 255, 0.2)",
+          duration: 0.3,
           ease: "power2.out",
         });
-        gsap.to(dot, { opacity: 0.3, scale: 0.7, duration: 0.3 });
+        gsap.to(dot, { scale: 0.5, duration: 0.2 });
       } else {
         setCursorText("");
-        gsap.to(lens, {
+        gsap.to(ring, {
           scale: 1,
-          borderColor: "rgba(245, 245, 247, 0.2)",
-          backgroundColor: "transparent",
-          duration: 0.4,
+          borderColor: "#ffffff",
+          backgroundColor: "rgba(255, 255, 255, 0.05)",
+          duration: 0.3,
           ease: "power2.out",
         });
-        gsap.to(dot, { opacity: 1, scale: 1, duration: 0.3 });
+        gsap.to(dot, { scale: 1, duration: 0.2 });
       }
     };
 
-    window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("mousedown", onMouseDown);
-    window.addEventListener("mouseup", onMouseUp);
-    document.addEventListener("mouseleave", onMouseLeave);
-    document.addEventListener("mouseover", handleElementHover);
+    // Global window tracking so it moves uninterrupted everywhere across the page
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+    window.addEventListener("mousedown", onMouseDown, { passive: true });
+    window.addEventListener("mouseup", onMouseUp, { passive: true });
+    window.addEventListener("mouseover", handleElementHover, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("mousedown", onMouseDown);
       window.removeEventListener("mouseup", onMouseUp);
-      document.removeEventListener("mouseleave", onMouseLeave);
-      document.removeEventListener("mouseover", handleElementHover);
+      window.removeEventListener("mouseover", handleElementHover);
     };
-  }, [isVisible]);
-
-  if (!isPointerFine) return null;
+  }, []);
 
   return (
     <div
-      className={`pointer-events-none fixed inset-0 z-[9999] overflow-hidden transition-opacity duration-500 ${
-        isVisible ? "opacity-100" : "opacity-0"
-      }`}
+      className="fixed top-0 left-0 pointer-events-none z-[99999]"
+      style={{ zIndex: 99999 }}
       aria-hidden="true"
     >
-      {/* Precision Focal Dot */}
+      {/* Precision High-Contrast Focal Dot */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 w-1.5 h-1.5 -ml-[3px] -mt-[3px] rounded-full bg-[#F5F5F7] pointer-events-none z-20 gpu-accel shadow-[0_0_6px_rgba(245,245,247,0.4)]"
+        className="fixed top-0 left-0 w-3 h-3 -ml-1.5 -mt-1.5 rounded-full bg-white shadow-[0_0_12px_#ffffff,0_2px_8px_rgba(0,0,0,0.95)] pointer-events-none z-[99999] gpu-accel"
+        style={{ zIndex: 99999 }}
       />
 
-      {/* Optical Ring */}
+      {/* Optical Ring / Reading Lens with drop shadow */}
       <div
-        ref={lensRef}
-        className="fixed top-0 left-0 w-9 h-9 -ml-[18px] -mt-[18px] rounded-full border border-[#F5F5F7]/20 pointer-events-none z-10 flex items-center justify-center text-[9px] text-[#F5F5F7] tracking-widest uppercase gpu-accel"
+        ref={ringRef}
+        className="fixed top-0 left-0 w-10 h-10 -ml-5 -mt-5 rounded-full border-2 border-white bg-white/10 backdrop-blur-[1px] shadow-[0_0_16px_rgba(255,255,255,0.5),0_2px_10px_rgba(0,0,0,0.9)] pointer-events-none z-[99999] flex items-center justify-center text-[10px] text-white tracking-widest uppercase gpu-accel"
+        style={{ zIndex: 99999 }}
       >
         {cursorText && (
-          <span ref={labelRef} className="scale-75 text-[#F5F5F7] select-none font-light">
+          <span
+            ref={labelRef}
+            className="scale-75 text-white select-none font-bold drop-shadow-[0_1px_3px_rgba(0,0,0,0.95)]"
+          >
             {cursorText}
           </span>
         )}

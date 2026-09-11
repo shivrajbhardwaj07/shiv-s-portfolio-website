@@ -19,7 +19,7 @@ export default function SwissHeader() {
       {/* Studio Wordmark */}
       <button
         onClick={() => scrollTo("#hero")}
-        className="text-xs uppercase tracking-[0.25em] font-light text-[#F5F5F7] hover:opacity-70 transition-all duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)] cursor-pointer text-left"
+        className="text-[10px] md:text-xs uppercase tracking-[0.25em] font-mono font-normal text-white hover:opacity-70 transition-all duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)] cursor-pointer text-left"
       >
         SHIVRAJ BHARDWAJ
       </button>
@@ -30,7 +30,7 @@ export default function SwissHeader() {
           <button
             key={item.label}
             onClick={() => scrollTo(item.target)}
-            className="text-[11px] uppercase tracking-[0.2em] font-light text-[#a1a1a6] hover:text-[#F5F5F7] transition-all duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)] cursor-pointer"
+            className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-mono text-white/50 hover:text-white transition-all duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)] cursor-pointer"
           >
             {item.label}
           </button>
@@ -40,10 +40,10 @@ export default function SwissHeader() {
       {/* Action CTA: Elegant text link with animated underline */}
       <button
         onClick={() => scrollTo("#terminal")}
-        className="group relative pb-1 text-xs uppercase tracking-[0.2em] font-light text-[#F5F5F7] transition-all duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)] cursor-pointer flex flex-col items-end"
+        className="group relative pb-1 text-[10px] md:text-xs uppercase tracking-[0.2em] font-mono text-white transition-all duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)] cursor-pointer flex flex-col items-end"
       >
         <span>{'INITIATE [→]'}</span>
-        <span className="h-[1px] bg-[#F5F5F7] w-0 group-hover:w-full transition-all duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)]" />
+        <span className="h-[1px] bg-white w-0 group-hover:w-full transition-all duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)]" />
       </button>
     </header>
   );

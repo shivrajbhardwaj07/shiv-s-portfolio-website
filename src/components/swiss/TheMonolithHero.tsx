@@ -33,32 +33,32 @@ export default function TheMonolithHero() {
       className="relative min-h-screen h-screen flex flex-col justify-between px-6 sm:px-12 lg:px-20 max-w-[1700px] mx-auto pt-28 pb-16 select-none"
     >
       {/* Top Meta Bar - Refined Editorial Spacing */}
-      <div className="hero-fade flex items-center justify-between text-[11px] uppercase tracking-[0.25em] text-[#a1a1a6] font-light pt-4">
+      <div className="hero-fade flex items-center justify-between text-[10px] md:text-xs uppercase tracking-[0.2em] font-mono text-white/50 pt-4">
         <div>
-          SYS.ID: SHIVRAJ // AGE: <span className="font-mono text-xs">19</span> // STATUS: DEPLOYING
+          SYS.ID: SHIVRAJ // AGE: <span>19</span> // STATUS: DEPLOYING
         </div>
-        <div className="hidden sm:block text-[#a1a1a6]/60">
-          GLOBAL ARCHITECTURE // <span className="font-mono text-xs">2026</span>
+        <div className="hidden sm:block">
+          GLOBAL ARCHITECTURE // <span>2026</span>
         </div>
       </div>
 
-      {/* Center: Massive Monolith Title breaking the standard grid */}
-      <div className="my-auto py-8">
+      {/* Center: Monolith Title with generous whitespace */}
+      <div className="my-auto py-20 md:py-32">
         <h1
           ref={titleRef}
-          className="hero-fade font-sans text-[15vw] sm:text-[14vw] lg:text-[13vw] font-light tracking-tighter text-[#F5F5F7] uppercase leading-[0.82] transition-colors duration-[800ms]"
+          className="hero-fade text-4xl md:text-6xl font-serif font-medium tracking-tight text-[#F5F5F7] uppercase leading-[1.1] transition-colors duration-[800ms]"
         >
           SHIVRAJ <br />
           BHARDWAJ.
         </h1>
       </div>
 
-      {/* Bottom: Subtitle & Scroll Indicator with No Harsh Borders */}
-      <div className="hero-fade pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-        <div className="text-[11px] sm:text-xs tracking-[0.3em] uppercase text-[#a1a1a6] font-light">
+      {/* Bottom: Subtitle & Scroll Indicator */}
+      <div className="hero-fade pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6 text-[10px] md:text-xs tracking-[0.2em] uppercase font-mono text-white/50">
+        <div>
           SYSTEMS ARCHITECT.
         </div>
-        <div className="text-[10px] tracking-[0.25em] uppercase text-[#a1a1a6]/60 flex items-center gap-3 font-light">
+        <div className="flex items-center gap-3">
           <span>SCROLL TO INITIALIZE</span>
           <span className="animate-pulse">↓</span>
         </div>

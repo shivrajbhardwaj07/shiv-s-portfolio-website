@@ -18,8 +18,26 @@ export default function CanvasScrubber() {
 
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d", { alpha: false });
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
+
+    // 1. Get the screen's actual pixel density
+    const dpr = window.devicePixelRatio || 1;
+
+    // 2. Set the internal canvas resolution to the high-def size
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+
+    // 3. Keep the CSS size to the exact viewport size so it doesn't break the layout
+    canvas.style.width = `${window.innerWidth}px`;
+    canvas.style.height = `${window.innerHeight}px`;
+
+    // 4. Scale the rendering context to match the density
+    ctx.scale(dpr, dpr);
+
+    // 5. Ensure image smoothing is maximizing quality
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
 
     const totalFrames = 300;
     const frames: HTMLImageElement[] = [];
@@ -28,61 +46,67 @@ export default function CanvasScrubber() {
     let loadedCount = 0;
     let scrollTriggerInstance: ScrollTrigger | null = null;
 
-    // Renders the requested frame simulating object-fit: cover
+    // Renders the requested frame using tunable crop cover logic
     const drawFrame = (index: number) => {
       if (!canvas || !ctx) return;
       const img = frames[index];
-      if (!img || !img.complete || img.naturalWidth === 0) return;
+      if (!img || !img.complete) return;
 
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const width = canvas.width / dpr;
-      const height = canvas.height / dpr;
+      const imgWidth = img.naturalWidth || img.width;
+      const imgHeight = img.naturalHeight || img.height;
+      if (imgWidth === 0 || imgHeight === 0) return;
 
-      ctx.save();
-      ctx.scale(dpr, dpr);
+      const w = window.innerWidth;
+      const h = window.innerHeight;
 
-      // Object-fit: cover math so images never stretch or distort
-      const imgAspect = img.naturalWidth / img.naturalHeight;
-      const canvasAspect = width / height;
+      // 1. Calculate the Cover scale
+      const scale = Math.max(w / imgWidth, h / imgHeight);
+      const scaledWidth = imgWidth * scale;
+      const scaledHeight = imgHeight * scale;
 
-      let drawW: number;
-      let drawH: number;
-      let drawX: number;
-      let drawY: number;
+      // 2. Center horizontally
+      const x = (w - scaledWidth) / 2;
 
-      if (canvasAspect > imgAspect) {
-        drawW = width;
-        drawH = width / imgAspect;
-        drawX = 0;
-        drawY = (height - drawH) / 2;
-      } else {
-        drawH = height;
-        drawW = height * imgAspect;
-        drawX = (width - drawW) / 2;
-        drawY = 0;
-      }
+      // 3. THE TUNABLE Y-AXIS OFFSET:
+      // 0.0 = Absolute Top (Shows face)
+      // 1.0 = Absolute Bottom (Shows only lower body/waist)
+      // 0.25 = The Sweet Spot (Crops the head, starts at the neck/chest, shows the suit)
+      const cropFactor = 0.25;
 
-      ctx.drawImage(img, drawX, drawY, drawW, drawH);
-      ctx.restore();
+      // Calculate the Y position based on the crop factor
+      const y = (h - scaledHeight) * cropFactor;
+
+      // 4. Draw the image with the new offset
+      ctx.clearRect(0, 0, w, h);
+      ctx.drawImage(img, 0, 0, imgWidth, imgHeight, x, y, scaledWidth, scaledHeight);
     };
 
     // Recalculates canvas dimensions on window resize
     const handleResize = () => {
-      if (!canvas) return;
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const w = window.innerWidth;
-      const h = window.innerHeight;
+      if (!canvas || !ctx) return;
 
-      canvas.width = w * dpr;
-      canvas.height = h * dpr;
-      canvas.style.width = `${w}px`;
-      canvas.style.height = `${h}px`;
+      // 1. Get the screen's actual pixel density
+      const dpr = window.devicePixelRatio || 1;
+
+      // 2. Set the internal canvas resolution to the high-def size
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+
+      // 3. Keep the CSS size to the exact viewport size so it doesn't break the layout
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
+
+      // 4. Scale the rendering context to match the density
+      ctx.scale(dpr, dpr);
+
+      // 5. Ensure image smoothing is maximizing quality
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
 
       drawFrame(currentFrameIndexRef.current);
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize();
 
     // Map scroll progress (0.0 to 1.0) to the 300 video frames
     // 0% - 15%: Facing front (Hero cover story)
@@ -165,17 +189,17 @@ export default function CanvasScrubber() {
 
   return (
     <div
-      className="fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0"
+      className="fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0 bg-black"
       style={{ zIndex: 0 }}
     >
-      {/* HTML5 Canvas scrubbing through the 300 frames */}
+      {/* HTML5 Canvas scrubbing through the 300 frames - Edge-to-edge cover */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+        className="absolute inset-0 w-full h-full pointer-events-none"
       />
 
-      {/* Lighting: subtle rich dark slate overlay over canvas */}
-      <div className="absolute inset-0 bg-[#0A0A0B]/70 pointer-events-none z-[1]" />
+      {/* Lighting: dark overlay to force white text to pop aggressively against the background */}
+      <div className="absolute inset-0 bg-black/60 pointer-events-none z-[1]" />
 
       {/* Sleek Minimalist Preload Indicator */}
       {!isLoaded && (

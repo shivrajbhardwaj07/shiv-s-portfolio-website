@@ -1,21 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, JetBrains_Mono } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
 
 export const viewport: Viewport = {
-  themeColor: "#F8FAFC",
+  themeColor: "#0A0A0B",
   width: "device-width",
   initialScale: 1,
 };
@@ -50,11 +41,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${jetbrainsMono.variable} antialiased selection:bg-[#F5F5F7]/20 selection:text-[#F5F5F7] bg-[#0A0A0B]`}
-    >
-      <body className="min-h-full font-sans overflow-x-hidden bg-[#0A0A0B] text-[#F5F5F7]">
+    <html lang="en" className="bg-black">
+      <body className={`${inter.variable} ${playfair.variable} font-sans bg-black antialiased`}>
         {children}
       </body>
     </html>

@@ -31,15 +31,15 @@ export default function ExecutionProtocol() {
     >
       <div className="grid grid-cols-12 gap-4 mb-24">
         <div className="col-span-12 md:col-span-3">
-          <span className="text-[11px] uppercase tracking-[0.25em] text-[#a1a1a6] block font-light">
-            <span className="font-mono text-xs">07</span> // EXECUTION PROTOCOL
+          <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-mono text-white/50 block">
+            07 // EXECUTION PROTOCOL
           </span>
-          <span className="text-xs uppercase tracking-[0.2em] text-[#a1a1a6]/50 block mt-2 font-light">
+          <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-mono text-white/40 block mt-2">
             DELIVERY LIFECYCLE
           </span>
         </div>
         <div className="col-span-12 md:col-start-4 md:col-span-8">
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-light text-[#F5F5F7] tracking-tighter leading-[0.9]">
+          <h2 className="text-2xl md:text-4xl font-serif font-normal tracking-tight text-white/90 leading-[1.2]">
             How systems are taken from operational chaos to production velocity.
           </h2>
         </div>
@@ -50,23 +50,24 @@ export default function ExecutionProtocol() {
         {steps.map((step) => (
           <div
             key={step.num}
-            className="border-b border-[#ffffff10] py-14 sm:py-20 grid grid-cols-12 gap-4 items-start"
+            className="border-b border-[#ffffff10] py-10 sm:py-14 grid grid-cols-12 gap-4 items-start"
           >
             {/* Step Number / Timeline */}
-            <div className="col-span-12 md:col-span-2 text-xs text-[#a1a1a6]/50 font-light tracking-wide">
-              PHASE // <span className="font-mono text-xs">{step.timeline}</span>
+            <div className="col-span-12 md:col-span-2 text-[10px] md:text-xs uppercase tracking-[0.2em] font-mono text-white/50">
+              PHASE // <span>{step.timeline}</span>
             </div>
 
             {/* Title */}
             <div className="col-span-12 md:col-span-4">
-              <h3 className="text-3xl sm:text-5xl font-light tracking-tighter text-[#F5F5F7] leading-[0.9]">
-                <span className="font-mono font-light">{step.num}</span> {step.title}
+              <h3 className="text-xl md:text-2xl font-serif font-normal tracking-tight text-white/90 leading-[1.2]">
+                <span className="font-mono text-base mr-2 text-white/60">{step.num}</span>
+                {step.title}
               </h3>
             </div>
 
             {/* Description */}
             <div className="col-span-12 md:col-span-6">
-              <p className="text-base sm:text-lg text-[#a1a1a6] font-light leading-relaxed tracking-wide">
+              <p className="text-sm md:text-base font-sans font-light text-[#a1a1a6] leading-relaxed">
                 {step.desc}
               </p>
             </div>

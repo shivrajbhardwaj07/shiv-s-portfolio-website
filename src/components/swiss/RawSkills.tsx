@@ -10,10 +10,10 @@ export default function RawSkills() {
     >
       <div className="grid grid-cols-12 gap-4 mb-16">
         <div className="col-span-12">
-          <span className="text-[11px] uppercase tracking-[0.25em] text-[#a1a1a6] block font-light">
-            <span className="font-mono text-xs">04</span> // RAW SKILLS
+          <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-mono text-white/50 block">
+            04 // RAW SKILLS
           </span>
-          <span className="text-xs uppercase tracking-[0.2em] text-[#a1a1a6]/50 block mt-2 font-light">
+          <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-mono text-white/40 block mt-2">
             STACK TAXONOMY
           </span>
         </div>
@@ -21,7 +21,7 @@ export default function RawSkills() {
 
       {/* Edge-to-edge block of uppercase editorial text */}
       <div className="w-full">
-        <p className="text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-light uppercase tracking-tight text-[#F5F5F7]/75 leading-[1.3] text-justify hyphens-none">
+        <p className="text-lg sm:text-xl md:text-2xl font-sans font-light uppercase tracking-widest text-[#a1a1a6] leading-relaxed">
           FRONTEND_ARCHITECTURE // BACKEND_SYSTEMS // DATABASE_OPTIMIZATION // ALGORITHMIC_LOGIC // BUSINESS_MANAGEMENT_SOFTWARE // HIGH_SPEED_EXECUTION
         </p>
       </div>

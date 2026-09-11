@@ -32,15 +32,15 @@ export default function TheArsenal() {
       {/* Section Label in 12-col Grid */}
       <div className="grid grid-cols-12 gap-4 mb-20">
         <div className="col-span-12 md:col-span-3">
-          <span className="text-[11px] uppercase tracking-[0.25em] text-[#a1a1a6] block font-light">
-            <span className="font-mono text-xs">03</span> // THE ARSENAL
+          <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-mono text-white/50 block">
+            03 // CAPABILITIES
           </span>
-          <span className="text-xs uppercase tracking-[0.2em] text-[#a1a1a6]/50 block mt-2 font-light">
+          <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-mono text-white/40 block mt-2">
             CORE DISCIPLINES
           </span>
         </div>
         <div className="col-span-12 md:col-start-4 md:col-span-8">
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-light text-[#F5F5F7] tracking-tighter leading-[0.9]">
+          <h2 className="text-2xl md:text-4xl font-serif font-normal tracking-tight text-white/90 leading-[1.2]">
             High-leverage engineering capabilities executed without bloat.
           </h2>
         </div>
@@ -51,27 +51,27 @@ export default function TheArsenal() {
         {capabilities.map((item) => (
           <div
             key={item.id}
-            className="group py-12 sm:py-16 border-b border-[#ffffff10] cursor-default"
+            className="group py-10 sm:py-14 border-b border-[#ffffff10] cursor-default"
           >
             <div className="grid grid-cols-12 gap-4 items-baseline transition-transform duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-x-[4px]">
               {/* Item ID - Monospace strictly for tiny numbers */}
-              <div className="col-span-12 sm:col-span-2 font-mono text-xs text-[#a1a1a6]/50 group-hover:text-[#F5F5F7] transition-colors duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)]">
+              <div className="col-span-12 sm:col-span-2 font-mono text-[10px] md:text-xs tracking-[0.2em] text-white/50 group-hover:text-white transition-colors duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)]">
                 {item.id} //
               </div>
 
               {/* Title & Description */}
               <div className="col-span-12 sm:col-span-7">
-                <h3 className="text-2xl sm:text-4xl lg:text-5xl font-light tracking-tighter text-[#F5F5F7] leading-[0.95]">
+                <h3 className="text-xl md:text-2xl font-serif font-normal tracking-tight text-white/90 leading-[1.2]">
                   {item.title}
                 </h3>
-                <p className="text-sm sm:text-base text-[#a1a1a6] font-light tracking-wide mt-3">
+                <p className="text-sm font-sans font-light text-[#a1a1a6] mt-2">
                   ({item.desc})
                 </p>
               </div>
 
               {/* Technical Scope */}
               <div className="col-span-12 sm:col-span-3 text-left sm:text-right pt-2 sm:pt-0">
-                <span className="text-[11px] uppercase tracking-[0.15em] text-[#a1a1a6]/50 group-hover:text-[#a1a1a6] transition-colors duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)] font-light">
+                <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-mono text-white/50 group-hover:text-white transition-colors duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)]">
                   {item.scope}
                 </span>
               </div>
